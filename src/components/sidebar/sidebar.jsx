@@ -10,9 +10,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PlagiarismIcon from '@mui/icons-material/Plagiarism';
 import Toolbar from '@mui/material/Toolbar';
 
+import EmployeesList from '../employees/employees-list';
 import './sidebar.style.css';
 import { Divider } from '@material-ui/core';
-import EmployeesList from '../employees/employees-list';
 
 const drawerWidth = 180;
 const list = [
@@ -91,18 +91,19 @@ const SideBar=(props) => {
 		<CssBaseline/>
 		<AppBar position="fixed" open={open}>
 		  <Toolbar>
-			<Box>
+			<Box sx={{ width:1, maxHeight: 1 }}>
 				{!open &&<IconButton
 				color="inherit"
 				aria-label="open drawer"
 				onClick={handleDrawerOpen}
 				edge="start"
 				sx={{ mr: 2, ...{ display: 'block' }}}
-          >
+          		>
 			  <ChevronRightIcon />
 			</IconButton> }
 			<EmployeesList list={data}/>
 			</Box>
+			
 		  </Toolbar>
 		</AppBar>
 		<Drawer

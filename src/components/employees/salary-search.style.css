@@ -1,0 +1,22 @@
+.side {
+	background-color: grey;
+}
+
+.icon {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 50px;
+	font-weight: bolder;
+	color:black;
+	background-color: #64575A;
+	height: auto;
+}
+
+.card {
+	align-items:center;
+	margin-bottom: 10px;
+	padding: 10px 10px 10px 10px;
+	font: size smaller;
+}
+

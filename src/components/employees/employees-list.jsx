@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import MaterialTable from '@material-table/core';
 import EditIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/DeleteForever';
 import AddIcon from '@mui/icons-material/Add';
 
+import SalarySearch from '../employees/salary-search';
 import EmployeeUploadDialog from '../employee-dialog/employee-uploader';
 import EmployeeEditDialog from '../employee-dialog/employee-edit';
 import EmployeeRemoveDialog from '../employee-dialog/employee-remove';;
@@ -59,21 +60,16 @@ const EmployeesList = ({list}) => {
   };
 
 	const onUploadSucess =(newData) => {
-		console.log(newData)
 		let newEmplist = newData;
 		let newList = [...data]
-		console.log(newEmplist.length)
 		for (let i =0; i < newEmplist.length; i++) {
 			const index = newList.findIndex(el => el.id ===newEmplist[i].id);
-			console.log(index)
 			if (index>=0) {
 				newList[index] = newEmplist[i]
 			} else {
 				newList.push(newEmplist[i])
 			}
 		}
-		console.log(newList)
-
 		setData(newList)
 		cancelAction()
 	}
@@ -94,18 +90,23 @@ const EmployeesList = ({list}) => {
 		cancelAction()
 	}
 
+	const onSearchSucess =(newList) => {
+		setData(newList);
+	}
+
   return (
-    <div style={{ maxWidth: '100%' }}>
+    <Fragment>
+		<SalarySearch employeeList={data} onSearchSucess = {onSearchSucess}/>
         <MaterialTable
           columns={[
-            { title: 'Id', field: 'id', width: 150,	},
-            { title: 'Login', field: 'login', type: 'numeric'},
-            { title: 'Name', field: 'name', type: 'numeric'},
-            { title: 'Salary', field: 'salary', type: 'numeric',},
+            { title: 'Id', field: 'id', align: "left" ,	},
+            { title: 'Login', field: 'login', type: 'numeric', align: "left" },
+            { title: 'Name', field: 'name', type: 'numeric', align: "left" },
+            { title: 'Salary', field: 'salary', type: 'numeric',align: "left" },
           ]}
 		  data={data}
           title="Employees"
-		  options={{actionsColumnIndex: -1,}}
+		  options={{actionsColumnIndex: -1,pageSize:10,maxBodyHeight: 400}}
 		  actions = {tableactions}
         />
 		{showEditDialog? <EmployeeEditDialog 
@@ -126,7 +127,7 @@ const EmployeesList = ({list}) => {
             onCancel={cancelAction}
         />: null}
 
-	</div>
+	</Fragment>
   );
 };
 
