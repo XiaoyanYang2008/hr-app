@@ -18,12 +18,13 @@ const EmployeeEditDialog=({dialogopen, employee, onUpdateSucess, onCancel}) => {
     const {name, value}  = event.target;
 	if (event.target.type==='number') {
 		const arr = value.split('.');
-
-		if(arr.length < 2 ) {
-			setData({ ...data, [name]: value });
-		} else {
-			if (arr[1].length <= 2) {
+		if (value >=0) {
+			if(arr.length < 2 ) {
 				setData({ ...data, [name]: value });
+			} else {
+				if (arr[1].length <= 2) {
+					setData({ ...data, [name]: value });
+				}
 			}
 		}
 	} else {

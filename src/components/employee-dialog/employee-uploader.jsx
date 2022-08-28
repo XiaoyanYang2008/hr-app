@@ -11,29 +11,37 @@ import Papa from "papaparse";
 import './employee-uploader.style.css';
 import * as actions from '../../store/employee/employee.action';
 
-const findDuplication =(empList) => {
+const checkError =(empList) => {
+	let newEmplist = []
 	let idList = []
 	let loginList =[]
-	let duplicateId = false;
-	let duplicateLogin = false;
+
 	for ( let i=0; i<empList.length; i++) {
 		if (idList.includes(empList[i].id)) {
-			duplicateId = true;
-			return [duplicateId, duplicateLogin]
+			return [true, 'There is duplicated id or login in the file!', []]
 		} else {
 			idList.push(empList[i].id)
 		}
-
+		
 		if (loginList.includes(empList[i].login)) {
-			duplicateLogin = true;
-			return [duplicateId, duplicateLogin]
+			return [true, 'There is duplicated id or login in the file!', []]
 		} else {
 			loginList.push(empList[i].login)
 		}
+
+		if (!empList[i].id || !empList[i].login || !empList[i].name || !empList[i].salary) {
+			return [true, 'Not all the columns be filled in the file!', []]
+		}
+
+		if (empList[i].id.trim().startsWith('#') || empList[i].login.trim().startsWith('#') 
+		|| empList[i].name.trim().startsWith('#') || empList[i].salary.trim().startsWith('#')) {
+			continue;
+		}
+
+		newEmplist.push(empList[i])
 	}
 
-	return [duplicateId, duplicateLogin]
-
+	return [false, '', newEmplist]
 }
 
 const EmployeeUploadDialog = ({ dialogopen, onCancel, onUploadSucess}) => {
@@ -59,15 +67,14 @@ const EmployeeUploadDialog = ({ dialogopen, onCancel, onUploadSucess}) => {
 			skipEmptyLines: true,
 			complete: function(results) {
 				empData =  results.data;
-				let duplicate = findDuplication(empData);
-
-				if (duplicate[0] || duplicate[1]) {
-					return enqueueSnackbar('There is duplicated id or login in the file!', { variant: 'error'});
+				let checkData = checkError(empData);
+				if (checkData[0]) {
+					return enqueueSnackbar(checkData[1], { variant: 'error'});
 				}
 				setFile(file)
 				setFileLoaded(true)
 				setFilename(file.name)
-				setData(empData)
+				setData(checkData[2])
 			}})
     };
 
