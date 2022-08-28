@@ -12,6 +12,7 @@ import Toolbar from '@mui/material/Toolbar';
 
 import './sidebar.style.css';
 import { Divider } from '@material-ui/core';
+import EmployeesList from '../employees/employees-list';
 
 const drawerWidth = 180;
 const list = [
@@ -100,6 +101,7 @@ const SideBar=(props) => {
           >
 			  <ChevronRightIcon />
 			</IconButton> }
+			<EmployeesList list={data}/>
 			</Box>
 		  </Toolbar>
 		</AppBar>
