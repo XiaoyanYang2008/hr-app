@@ -18,7 +18,7 @@ const EmployeeEditDialog=({dialogopen, employee, onUpdateSucess, onCancel}) => {
     const {name, value}  = event.target;
 	if (event.target.type==='number') {
 		const arr = value.split('.');
-		console.log(arr.length)
+
 		if(arr.length < 2 ) {
 			setData({ ...data, [name]: value });
 		} else {

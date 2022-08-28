@@ -21,10 +21,8 @@ export const getEmployeesAsync= async () => {
 export const updateEmployeeAsync= async ( employee) => {
     try {
         await axios.put('/employees/' + employee.id, employee);
-		console.log('ok')
     } catch (err) {
         throw Error(err.response);
-		console.log('fail')
     }
 };
 

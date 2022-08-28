@@ -12,8 +12,6 @@ import './employee-uploader.style.css';
 import * as actions from '../../store/employee/employee.action';
 
 const findDuplication =(empList) => {
-	console.log(empList)
-
 	let idList = []
 	let loginList =[]
 	let duplicateId = false;
@@ -62,7 +60,7 @@ const EmployeeUploadDialog = ({ dialogopen, onCancel, onUploadSucess}) => {
 			complete: function(results) {
 				empData =  results.data;
 				let duplicate = findDuplication(empData);
-				console.log(duplicate)
+
 				if (duplicate[0] || duplicate[1]) {
 					return enqueueSnackbar('There is duplicated id or login in the file!', { variant: 'error'});
 				}
