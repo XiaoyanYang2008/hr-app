@@ -1,0 +1,30 @@
+
+.loadicon {
+	justify-content: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.dialog {
+	width: 550px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	vertical-align:auto;
+}
+
+.file {
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: blue;
+}
+
+.button {
+	background-color: black;
+	color: white;
+	width: 250px;
+}
+
+

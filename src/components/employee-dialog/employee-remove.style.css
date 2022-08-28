@@ -1,0 +1,21 @@
+
+.dialog {
+	width: 550px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	vertical-align:auto;
+}
+
+
+.button {
+	width: 200px;
+	justify-content: center;
+	align-items: center;
+	margin-left: 10px;
+	margin-right: 10px;
+	background-color: black;
+	color: white;
+}
+
+

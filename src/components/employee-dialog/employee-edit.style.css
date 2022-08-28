@@ -1,0 +1,42 @@
+.text {
+	width: 350px;
+    margin: 10px 10px 10px 0px;          
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 1px;
+    font-weight: 500;
+}
+
+.icon {
+	color: grey;
+	margin-right: 8px;
+	margin-top: 8px;
+	margin-right: 10px;
+	width: 40px;
+	height: auto;
+	position: absolute;
+}
+
+.content {
+	text-align: left;
+	min-width: 450;
+}
+
+.dialog {
+	width: 550px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	vertical-align:auto;
+}
+
+.button {
+	background-color: black;
+	color: white;
+	width: 350px
+}
+
+
+
+
