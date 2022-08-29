@@ -99,7 +99,7 @@ const EmployeeUploadDialog = ({ dialogopen, onCancel, onUploadSucess}) => {
 		<IconButton
           onClick={onCancel}
         >
-        <CloseIcon onClick={onCancel}/>
+        <CloseIcon/>
         </IconButton>
 		<CardContent>
         <Typography
