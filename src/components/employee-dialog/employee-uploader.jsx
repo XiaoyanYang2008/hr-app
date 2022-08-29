@@ -7,9 +7,36 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloseIcon from '@mui/icons-material/Close';
 import {useSnackbar} from 'notistack';
 import Papa from "papaparse";
+import { makeStyles } from '@material-ui/core';
 
-import './employee-uploader.style.css';
 import * as actions from '../../store/employee/employee.action';
+
+const useStyles = makeStyles({
+	dialog: {
+	  position: 'center',
+	  width: 300,
+	},
+	button: {
+		position: 'center',
+		color: 'white',
+		backgroundColor: 'black',
+		width: 210,
+		height: 35,
+		marginLeft: 10,
+		'&:hover': {
+			backgroundColor: 'black',
+		},
+	},
+	icon: {
+		position: 'center',
+	},
+	file: {
+		position: 'center',
+		color: 'blue',
+		marginTop: 10,
+		marginBottom: 10,
+	}
+  });
 
 const checkError =(empList) => {
 	let newEmplist = []
@@ -45,6 +72,7 @@ const checkError =(empList) => {
 }
 
 const EmployeeUploadDialog = ({ dialogopen, onCancel, onUploadSucess}) => {
+	const classes = useStyles();
 	const [file, setFile] = useState({});
 	const [filename, setFilename]= useState('');
 	const [fileLoaded, setFileLoaded] = useState(false);
@@ -93,11 +121,14 @@ const EmployeeUploadDialog = ({ dialogopen, onCancel, onUploadSucess}) => {
         <Fragment>
 		<Dialog
         open={dialogopen}
-		className='dialog'
+		classes={{
+			paper: classes.dialog
+		  }}
       >
 		<DialogContent>
 		<IconButton
           onClick={onCancel}
+		  className={classes.icon}
         >
         <CloseIcon/>
         </IconButton>
@@ -115,16 +146,16 @@ const EmployeeUploadDialog = ({ dialogopen, onCancel, onUploadSucess}) => {
 					onChange={handleUploadClick}
 				/>
 				<label htmlFor="upload-file">
-				<Fab component="span">
-						<CloudUploadIcon />
+				<Fab component="span" className={classes.icon}>
+						<CloudUploadIcon className={classes.icon}/>
 				</Fab>
 			</label>
 		</Grid>
 		<Grid>
-		<Grid className="file">
+		<Grid className={classes.file}>
 		<Typography>{filename}</Typography>
 		</Grid>
-		<Button className='button' label={'Submit'} onClick={handleSubmit} disabled = {!fileLoaded}>Submit</Button>
+		<Button className={classes.button} label={'Submit'} onClick={handleSubmit} disabled = {!fileLoaded}>Submit</Button>
 		</Grid>
 		<Typography>
 		</Typography>

@@ -4,11 +4,40 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@material-ui/core/TextField';
 import { useSnackbar} from 'notistack';
+import { makeStyles } from '@material-ui/core';
 
-import './employee-edit.style.css';
 import * as actions from  '../../store/employee/employee.action';
 
+const useStyles = makeStyles({
+	dialog: {
+	  position: 'center',
+	  width: 320,
+	},
+	button: {
+		color: 'white',
+		backgroundColor: 'black',
+		width: 250,
+		height: 35,
+		marginLeft: 10,
+		'&:hover': {
+			backgroundColor: 'black',
+		},
+	},
+	title: {
+		paddingBottom: 20,
+	},
+	text: {
+		width: 270,     
+		paddingLeft: 10,
+		paddingRight: 10,
+		paddingTop: 10,
+		paddingBottom: 10,
+		fontWeight: 500,
+	}
+  });
+
 const EmployeeEditDialog=({dialogopen, employee, onUpdateSucess, onCancel}) => {
+  const classes = useStyles();
   const [data, setData] = useState(employee);
   const {enqueueSnackbar} = useSnackbar();
 
@@ -50,7 +79,9 @@ const EmployeeEditDialog=({dialogopen, employee, onUpdateSucess, onCancel}) => {
       <Dialog
         onClose={onCancel}
         open={dialogopen}
-		className='dialog'
+		classes={{
+			paper: classes.dialog
+		  }}
       >
 		<DialogContent className='content'>
 		<IconButton
@@ -60,11 +91,11 @@ const EmployeeEditDialog=({dialogopen, employee, onUpdateSucess, onCancel}) => {
         <CloseIcon/>
         </IconButton>
 		<form onSubmit={handleSubmit}>
-		<Typography>Employee id: {id} {name}</Typography>
-		<TextField className='text' label="Name" required variant="outlined" onChange={handleChange} name='name' value={name} />
-		<TextField className='text' label="Login" required variant="outlined" onChange={handleChange} name='login' value={login}  />
-		<TextField className='text' label="Salary" required variant="outlined" type='number' onChange={handleChange} name='salary' value={salary} />
-          <Button type='submit' label={'Submit'} className="button">Submit
+		<div ><Typography className={classes.title}>Employee id: {id} {name}</Typography></div>
+		<TextField className={classes.text} label="Name" required variant="outlined" onChange={handleChange} name='name' value={name} />
+		<TextField className={classes.text} label="Login" required variant="outlined" onChange={handleChange} name='login' value={login}  />
+		<TextField className={classes.text} label="Salary" required variant="outlined" type='number' onChange={handleChange} name='salary' value={salary} />
+          <Button type='submit' label={'Submit'} className={classes.button}>Submit
           </Button>
 		  </form>
 		  </DialogContent>
