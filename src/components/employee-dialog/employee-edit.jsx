@@ -57,7 +57,7 @@ const EmployeeEditDialog=({dialogopen, employee, onUpdateSucess, onCancel}) => {
 		className='icon'
         onClick={onCancel}
         >
-        <CloseIcon onClick={onCancel}/>
+        <CloseIcon/>
         </IconButton>
 		<form onSubmit={handleSubmit}>
 		<Typography>Employee id: {id} {name}</Typography>
